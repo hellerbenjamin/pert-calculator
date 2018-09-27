@@ -1,28 +1,64 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+
+    <div id="calculator">
+        <label>
+            Optimistic
+            <input type="number" name="optimistic"
+               v-model.number="inputs.optimistic"
+            />
+        </label>
+
+        <label>
+            Typical
+            <input type="number" name="typical"
+               v-model.number="inputs.typical"
+            />
+
+        </label>
+
+        <label>
+            Pessimistic
+            <input type="number" name="pessimistic"
+               v-model.number="inputs.pessimistic"
+            />
+        </label>
+
+        <div id="result">
+
+        </div>
+    </div>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'app',
+
+        data() {
+            return {
+                inputs: {
+                    'optimistic': 0,
+                    'typical': 0,
+                    'pessimistic': 0
+                },
+            }
+        },
+
+        mounted() {
+
+        },
+
+        methods: {
+
+
+
+        }
+
+
+    }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
