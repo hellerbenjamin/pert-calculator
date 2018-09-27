@@ -26,7 +26,7 @@
             />
         </label>
 
-        <div id="result" v-bind:class="this.totalValid">
+        <div id="result" v-bind:class="this.totalValid ? 'total' : 'warning'">
             Pert Total
             <div class="warning">Please enter estimates to receive a total</div>
             <div class="total"></div>
@@ -96,5 +96,16 @@
 </script>
 
 <style>
+    #calculator {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #56CBF9;
+        padding: 1em;
+    }
+
+    #calculator label {
+        display: block;
+        padding: 1em 0;
+    }
 
 </style>
