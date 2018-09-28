@@ -2,7 +2,7 @@
 
     <div id="calculator">
         <h1>Pert Calculator</h1>
-        <p>Input the number of hours you expect the project to take below</p>
+        <p id="instructions">Input the number of hours you expect the project to take below</p>
         <label>
             Optimistic Estimate
             <input type="number" name="optimistic"
@@ -62,7 +62,8 @@
             updateTotal() {
                 this.validateInputs();
 
-                let total = (this.inputs.optimistic + 4 * this.inputs.typical + this.inputs.pessimistic) / 6
+                let total = (this.inputs.optimistic + 4 * this.inputs.typical + this.inputs.pessimistic) / 6;
+                total = Math.round(total * 10)/10;
 
                 if (typeof total === 'number' && this.inputsValid === true) {
                     this.total = total;
@@ -97,9 +98,11 @@
     }
 </script>
 
+
 <style lang="scss">
     $dark: #4C4B4B;
     $light: #eeeeee;
+    $light-border: lighten( $dark, 10%);
     $warning: #F65350;
 
     #calculator {
@@ -115,9 +118,13 @@
             padding: 0;
         }
 
+        #instructions {
+            font-size: .8em;
+            margin-bottom: 1.5em;
+        }
+
         label {
             display: block;
-            padding: 1em 0;
 
             input {
                 text-align: center;
@@ -125,18 +132,23 @@
                 color: $light;
                 float: right;
                 border: none;
-                border-bottom: 1px solid $light;
+                border-bottom: 1px solid $light-border;
                 background: transparent;
             }
         }
 
         #result {
+            margin-top: 2em;
             display: block;
             border-top: 1px solid $light;
 
             .warning {
                 color: $warning;
                 display: block;
+            }
+            
+            span {
+                display: none;
             }
 
             .total {
@@ -151,6 +163,10 @@
 
                 .total {
                     display: block;
+                }
+
+                span {
+                    display: inline;
                 }
              }
         }
