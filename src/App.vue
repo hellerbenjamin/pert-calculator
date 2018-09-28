@@ -135,10 +135,15 @@
                 border-bottom: 1px solid $light-border;
                 background: transparent;
             }
+
+            @media( max-width: 600px ) {
+                padding: 1em 0;
+            }
         }
 
         #result {
             margin-top: 2em;
+            padding-top: 1em;
             display: block;
             border-top: 1px solid $light;
 
