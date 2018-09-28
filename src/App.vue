@@ -1,8 +1,10 @@
 <template>
 
     <div id="calculator">
+        <h1>Pert Calculator</h1>
+        <p>Input the number of hours you expect the project to take below</p>
         <label>
-            Optimistic
+            Optimistic Estimate
             <input type="number" name="optimistic"
                    v-model.number="inputs.optimistic"
                    v-on:change="updateTotal"
@@ -10,7 +12,7 @@
         </label>
 
         <label>
-            Typical
+            Typical Estimate
             <input type="number" name="typical"
                    v-model.number="inputs.typical"
                    v-on:change="updateTotal"
@@ -19,17 +21,17 @@
         </label>
 
         <label>
-            Pessimistic
+            Pessimistic Estimate
             <input type="number" name="pessimistic"
                    v-model.number="inputs.pessimistic"
                    v-on:change="updateTotal"
             />
         </label>
 
-        <div id="result" v-bind:class="this.totalValid ? 'total' : 'warning'">
-            Pert Total
-            <div class="warning">Please enter estimates to receive a total</div>
-            <div class="total"></div>
+        <div id="result" v-bind:class="this.totalValid ? 'valid' : 'notValid'">
+            <span>Pert Total</span>
+            <div class="warning">Please enter number estimates greater than zero to receive a total</div>
+            <div class="total">{{ this.total }}</div>
         </div>
     </div>
 
@@ -72,7 +74,7 @@
                 let inputs = this.inputs;
 
                 for (let key in inputs) {
-                    if (inputs[key] === 0 || typeof inputs[key] !== 'number' || this.isAbsolute( inputs[key]) === false) {
+                    if (inputs[key] === 0 || typeof inputs[key] !== 'number' || this.isAbsolute(inputs[key]) === false) {
                         this.inputsValid = false;
                         return;
                     }
@@ -95,17 +97,66 @@
     }
 </script>
 
-<style>
+<style lang="scss">
+    $dark: #4C4B4B;
+    $light: #eeeeee;
+    $warning: #F65350;
+
     #calculator {
+        color: $light;
         max-width: 800px;
         margin: 0 auto;
-        background: #56CBF9;
+        background: $dark;
         padding: 1em;
+        border-radius: 3px;
+
+        h1,p {
+            margin: 0;
+            padding: 0;
+        }
+
+        label {
+            display: block;
+            padding: 1em 0;
+
+            input {
+                text-align: center;
+                width: 50px;
+                color: $light;
+                float: right;
+                border: none;
+                border-bottom: 1px solid $light;
+                background: transparent;
+            }
+        }
+
+        #result {
+            display: block;
+            border-top: 1px solid $light;
+
+            .warning {
+                color: $warning;
+                display: block;
+            }
+
+            .total {
+                display: none;
+                float: right;
+            }
+
+            &.valid {
+                .warning {
+                    display: none;
+                }
+
+                .total {
+                    display: block;
+                }
+             }
+        }
     }
 
-    #calculator label {
-        display: block;
-        padding: 1em 0;
-    }
+
+
 
 </style>
